@@ -192,4 +192,4 @@ public class DeployNotifier {
 
 ## 라이선스
 
-[MIT License](LICENSE) © 2026 Disender contributors
+[MIT License](LICENSE) © 2026 ZaMan0806

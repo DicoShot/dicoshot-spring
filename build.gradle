@@ -44,7 +44,7 @@ configure(subprojects.findAll { it.name in publishableProjects }) { subproject -
                 new com.vanniktech.maven.publish.JavadocJar.Javadoc(),
                 true
         ))
-        publishToMavenCentral()
+        publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL)
         signAllPublications()
 
         coordinates(subproject.group.toString(), subproject.name, subproject.version.toString())
