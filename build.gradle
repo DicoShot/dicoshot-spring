@@ -1,0 +1,80 @@
+plugins {
+    id 'com.vanniktech.maven.publish' version '0.30.0' apply false
+}
+
+allprojects {
+    group = 'io.github.zaman0806'
+    version = '0.1.0'
+}
+
+subprojects {
+    apply plugin: 'java-library'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.compilerArgs << '-parameters'
+    }
+
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+    }
+}
+
+def publishableProjects = [
+        'disender-core',
+        'disender-spring-boot-3-starter',
+        'disender-spring-boot-4-starter'
+]
+
+configure(subprojects.findAll { it.name in publishableProjects }) { subproject ->
+    apply plugin: 'com.vanniktech.maven.publish'
+
+    mavenPublishing {
+        configure(new com.vanniktech.maven.publish.JavaLibrary(
+                new com.vanniktech.maven.publish.JavadocJar.Javadoc(),
+                true
+        ))
+        publishToMavenCentral()
+        signAllPublications()
+
+        coordinates(subproject.group.toString(), subproject.name, subproject.version.toString())
+
+        pom {
+            name = subproject.name
+            description = subproject.description ?: 'Disender — Discord webhook notifier SDK for Spring Boot.'
+            url = 'https://github.com/ZaMan0806/Disender'
+
+            licenses {
+                license {
+                    name = 'MIT License'
+                    url = 'https://opensource.org/licenses/MIT'
+                    distribution = 'repo'
+                }
+            }
+
+            developers {
+                developer {
+                    id = 'zaman0806'
+                    name = 'ZaMan0806'
+                    email = 's25012@gsm.hs.kr'
+                }
+            }
+
+            scm {
+                url = 'https://github.com/ZaMan0806/Disender'
+                connection = 'scm:git:https://github.com/ZaMan0806/Disender.git'
+                developerConnection = 'scm:git:ssh://git@github.com/ZaMan0806/Disender.git'
+            }
+        }
+    }
+}
