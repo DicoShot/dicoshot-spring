@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
 
@@ -44,8 +45,10 @@ public class DisenderAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    MessageFactory disenderMessageFactory(DisenderProperties properties) {
-        return new MessageFactory(properties.getApplicationName(), properties.getUsername());
+    MessageFactory disenderMessageFactory(DisenderProperties properties, Environment environment) {
+        String[] profiles = environment.getActiveProfiles();
+        String profile = profiles.length > 0 ? String.join(", ", profiles) : null;
+        return new MessageFactory(properties.getApplicationName(), properties.getUsername(), profile);
     }
 
     @Bean
