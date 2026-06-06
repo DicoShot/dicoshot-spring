@@ -1,5 +1,9 @@
 # Dicoshot
 
+[![Maven Central (Spring Boot 3)](https://img.shields.io/maven-central/v/io.github.dicoshot/dicoshot-spring-boot-3-starter?label=Spring%20Boot%203)](https://central.sonatype.com/artifact/io.github.dicoshot/dicoshot-spring-boot-3-starter)
+[![Maven Central (Spring Boot 4)](https://img.shields.io/maven-central/v/io.github.dicoshot/dicoshot-spring-boot-4-starter?label=Spring%20Boot%204)](https://central.sonatype.com/artifact/io.github.dicoshot/dicoshot-spring-boot-4-starter)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Spring Boot 애플리케이션이 시작/종료될 때 Discord 채널로 알림을 자동 발송하는 SDK입니다. 의존성 추가와 `application.yml` 설정만으로 동작합니다.
 
 ## 특징
