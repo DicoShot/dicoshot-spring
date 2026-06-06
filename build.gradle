@@ -3,8 +3,8 @@ plugins {
 }
 
 allprojects {
-    group = 'io.github.zaman0806'
-    version = '0.1.1'
+    group = 'io.github.dicoshot'
+    version = '0.2.0'
 }
 
 subprojects {
@@ -52,7 +52,7 @@ configure(subprojects.findAll { it.name in publishableProjects }) { subproject -
         pom {
             name = subproject.name
             description = subproject.description ?: 'Disender — Discord webhook notifier SDK for Spring Boot.'
-            url = 'https://github.com/ZaMan0806/Disender'
+            url = 'https://github.com/DicoShot/dicoshot-spring'
 
             licenses {
                 license {
@@ -71,9 +71,9 @@ configure(subprojects.findAll { it.name in publishableProjects }) { subproject -
             }
 
             scm {
-                url = 'https://github.com/ZaMan0806/Disender'
-                connection = 'scm:git:https://github.com/ZaMan0806/Disender.git'
-                developerConnection = 'scm:git:ssh://git@github.com/ZaMan0806/Disender.git'
+                url = 'https://github.com/DicoShot/dicoshot-spring'
+                connection = 'scm:git:https://github.com/DicoShot/dicoshot-spring.git'
+                developerConnection = 'scm:git:ssh://git@github.com/DicoShot/dicoshot-spring.git'
             }
         }
     }
