@@ -1,5 +1,5 @@
-rootProject.name = 'disender'
+rootProject.name = 'dicoshot'
 
-include 'disender-core'
-include 'disender-spring-boot-3-starter'
-include 'disender-spring-boot-4-starter'
+include 'dicoshot-core'
+include 'dicoshot-spring-boot-3-starter'
+include 'dicoshot-spring-boot-4-starter'

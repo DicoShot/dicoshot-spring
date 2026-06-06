@@ -31,9 +31,9 @@ subprojects {
 }
 
 def publishableProjects = [
-        'disender-core',
-        'disender-spring-boot-3-starter',
-        'disender-spring-boot-4-starter'
+        'dicoshot-core',
+        'dicoshot-spring-boot-3-starter',
+        'dicoshot-spring-boot-4-starter'
 ]
 
 configure(subprojects.findAll { it.name in publishableProjects }) { subproject ->
@@ -51,7 +51,7 @@ configure(subprojects.findAll { it.name in publishableProjects }) { subproject -
 
         pom {
             name = subproject.name
-            description = subproject.description ?: 'Disender — Discord webhook notifier SDK for Spring Boot.'
+            description = subproject.description ?: 'Dicoshot — Discord webhook notifier SDK for Spring Boot.'
             url = 'https://github.com/DicoShot/dicoshot-spring'
 
             licenses {
