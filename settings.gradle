@@ -1,5 +1,4 @@
 rootProject.name = 'dicoshot'
 
 include 'dicoshot-core'
-include 'dicoshot-spring-boot-3-starter'
-include 'dicoshot-spring-boot-4-starter'
+include 'dicoshot-spring-boot-starter'
