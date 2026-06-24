@@ -4,7 +4,9 @@ import io.dicoshot.core.DicoshotClient;
 import io.dicoshot.core.DicoshotProperties;
 import io.dicoshot.core.message.MessageFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -57,5 +59,12 @@ public class DicoshotAutoConfiguration {
                                                 MessageFactory dicoshotMessageFactory,
                                                 DicoshotProperties properties) {
         return new DicoshotEventListener(dicoshotClient, dicoshotMessageFactory, properties);
+    }
+
+    @Bean
+    @ConditionalOnClass(Aspect.class)
+    @ConditionalOnMissingBean
+    DicoshotNotifyAspect dicoshotNotifyAspect(DicoshotClient dicoshotClient) {
+        return new DicoshotNotifyAspect(dicoshotClient);
     }
 }

@@ -26,7 +26,7 @@ Spring Boot 3.2+ 와 4.x 모두 동일한 starter를 사용합니다.
 
 **Gradle**
 ```gradle
-implementation 'io.github.dicoshot:dicoshot-spring-boot-starter:0.4.0'
+implementation 'io.github.dicoshot:dicoshot-spring-boot-starter:0.5.0'
 ```
 
 **Maven**
@@ -34,7 +34,7 @@ implementation 'io.github.dicoshot:dicoshot-spring-boot-starter:0.4.0'
 <dependency>
     <groupId>io.github.dicoshot</groupId>
     <artifactId>dicoshot-spring-boot-starter</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
 </dependency>
 ```
 
@@ -124,6 +124,39 @@ public class DeployNotifier {
 }
 ```
 
+### `@DicoshotNotify`: 반환값으로 자동 발송
+
+메서드에 `@DicoshotNotify`를 붙이면, 그 메서드가 반환한 `DiscordMessage`가 정상 반환 직후 자동으로 전송됩니다. 이벤트가 발생하는 지점마다 메시지 형식만 정해서 `return`하면 됩니다.
+
+```java
+import io.dicoshot.core.message.DiscordEmbed;
+import io.dicoshot.core.message.DiscordMessage;
+import io.dicoshot.spring.DicoshotNotify;
+import org.springframework.stereotype.Component;
+
+@Component
+public class OrderNotifier {
+
+    @DicoshotNotify
+    public DiscordMessage onOrderPlaced(Order order) {
+        return DiscordMessage.builder()
+                .addEmbed(DiscordEmbed.builder()
+                        .title("New order #" + order.getId())
+                        .color(0x2ECC71)
+                        .addField("Amount", order.getAmount() + " KRW", true)
+                        .build())
+                .build();
+    }
+}
+```
+
+- **조건부 발송**: `null`을 반환하면 전송하지 않습니다. `return shouldNotify ? message : null;` 처럼 런타임에 발송 여부를 결정할 수 있습니다.
+- **반환 타입**: 메서드는 `DiscordMessage`를 반환해야 합니다. 그 외 타입을 반환하면 무시됩니다.
+- **실패 격리**: webhook 전송이 실패해도 경고 로그만 남기며, 어노테이션이 붙은 메서드의 호출 흐름에는 영향을 주지 않습니다. 메서드가 예외를 던지면 전송하지 않습니다.
+- **요구사항**: Spring AOP가 클래스패스에 있어야 동작합니다. 없으면 aspect가 등록되지 않으며 startup/shutdown 알림은 그대로 동작합니다. AOP가 없는 프로젝트라면 `spring-boot-starter-aop`를 추가하세요.
+
+> Spring AOP 프록시 기반이므로, 같은 클래스 내부에서의 자기 호출(self-invocation)에는 적용되지 않습니다. 다른 빈을 거쳐 호출하세요.
+
 ## 동작 방식
 
 1. starter는 `dicoshot.webhook-url`이 설정되어 있고 `dicoshot.enabled`가 `false`가 아닐 때만 활성화됩니다.
@@ -133,6 +166,7 @@ public class DeployNotifier {
    - `DicoshotClient`: webhook 전송 구현체
    - `MessageFactory`: startup/shutdown embed 생성기
    - `DicoshotEventListener`: 이벤트 구독자
+   - `DicoshotNotifyAspect`: `@DicoshotNotify` 메서드의 반환 메시지 발송 (Spring AOP가 있을 때만)
 3. `ApplicationReadyEvent` 수신 시 startup 메시지를, `ContextClosedEvent` 수신 시 shutdown 메시지를 발송합니다.
 4. webhook 호출이 실패해도 예외는 삼키고 WARN 로그만 남기므로 앱 기동/종료가 영향을 받지 않습니다.
 

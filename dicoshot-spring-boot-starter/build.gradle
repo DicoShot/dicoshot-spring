@@ -11,6 +11,8 @@ dependencies {
     compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
     compileOnly 'org.springframework:spring-web'
     compileOnly 'org.springframework:spring-context'
+    compileOnly 'org.springframework:spring-aop'
+    compileOnly 'org.aspectj:aspectjweaver'
     compileOnly 'org.slf4j:slf4j-api'
 
     annotationProcessor platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
@@ -19,6 +21,7 @@ dependencies {
     testImplementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-aop'
     testImplementation 'com.github.tomakehurst:wiremock-jre8-standalone:3.0.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
