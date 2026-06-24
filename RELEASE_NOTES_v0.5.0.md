@@ -30,11 +30,9 @@
 
   기존처럼 `DicoshotClient` 빈을 직접 주입받아 임의 시점에 메시지를 보내는 방식도 그대로 사용할 수 있습니다.
 
-### 동작 조건
-
-- `dicoshot-spring-boot-starter`가 `spring-aop`와 `aspectjweaver`를 전이 의존성으로 포함하므로 별도 설정 없이 동작합니다.
-
 ### 설치
+
+`spring-aop`와 `aspectjweaver`가 전이 의존성으로 포함되어 있으므로 별도 추가 없이 아래 하나만 추가하면 됩니다.
 
 ```gradle
 implementation 'io.github.dicoshot:dicoshot-spring-boot-starter:0.5.0'
@@ -57,7 +55,6 @@ implementation 'io.github.dicoshot:dicoshot-spring-boot-starter:0.5.0'
 
 - Java 17 이상
 - Spring Boot 3.2 이상 (3.2+ 또는 4.x). `RestClient` 도입 이전인 3.0~3.1은 지원하지 않습니다.
-- `@DicoshotNotify` 사용 시 Spring AOP (`spring-boot-starter-aop`)
 
 ### 라이선스
 
