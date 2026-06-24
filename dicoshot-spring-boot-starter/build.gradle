@@ -2,6 +2,8 @@ description = 'Dicoshot Spring Boot starter (3.2+ / 4.x) — auto-configuration 
 
 ext {
     springBootVersion = '3.3.5'
+    springFrameworkVersion = '6.1.14'
+    aspectjVersion = '1.9.22.1'
 }
 
 dependencies {
@@ -11,8 +13,8 @@ dependencies {
     compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
     compileOnly 'org.springframework:spring-web'
     compileOnly 'org.springframework:spring-context'
-    api 'org.springframework:spring-aop'
-    api 'org.aspectj:aspectjweaver'
+    api "org.springframework:spring-aop:${springFrameworkVersion}"
+    api "org.aspectj:aspectjweaver:${aspectjVersion}"
     compileOnly 'org.slf4j:slf4j-api'
 
     annotationProcessor platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
