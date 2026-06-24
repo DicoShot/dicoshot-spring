@@ -11,8 +11,8 @@ dependencies {
     compileOnly 'org.springframework.boot:spring-boot-autoconfigure'
     compileOnly 'org.springframework:spring-web'
     compileOnly 'org.springframework:spring-context'
-    compileOnly 'org.springframework:spring-aop'
-    compileOnly 'org.aspectj:aspectjweaver'
+    api 'org.springframework:spring-aop'
+    api 'org.aspectj:aspectjweaver'
     compileOnly 'org.slf4j:slf4j-api'
 
     annotationProcessor platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")

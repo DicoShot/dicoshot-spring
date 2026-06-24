@@ -153,7 +153,7 @@ public class OrderNotifier {
 - **조건부 발송**: `null`을 반환하면 전송하지 않습니다. `return shouldNotify ? message : null;` 처럼 런타임에 발송 여부를 결정할 수 있습니다.
 - **반환 타입**: 메서드는 `DiscordMessage`를 반환해야 합니다. 그 외 타입을 반환하면 무시됩니다.
 - **실패 격리**: webhook 전송이 실패해도 경고 로그만 남기며, 어노테이션이 붙은 메서드의 호출 흐름에는 영향을 주지 않습니다. 메서드가 예외를 던지면 전송하지 않습니다.
-- **요구사항**: Spring AOP가 클래스패스에 있어야 동작합니다. 없으면 aspect가 등록되지 않으며 startup/shutdown 알림은 그대로 동작합니다. AOP가 없는 프로젝트라면 `spring-boot-starter-aop`를 추가하세요.
+- **요구사항**: `dicoshot-spring-boot-starter`가 `spring-aop`와 `aspectjweaver`를 전이 의존성으로 포함하므로 별도 설정 없이 동작합니다.
 
 > Spring AOP 프록시 기반이므로, 같은 클래스 내부에서의 자기 호출(self-invocation)에는 적용되지 않습니다. 다른 빈을 거쳐 호출하세요.
 

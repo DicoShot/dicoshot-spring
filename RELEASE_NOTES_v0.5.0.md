@@ -32,12 +32,7 @@
 
 ### 동작 조건
 
-- `@DicoshotNotify`는 Spring AOP가 클래스패스에 있을 때만 활성화됩니다. 없으면 aspect가 등록되지 않으며 startup/shutdown 알림은 그대로 동작합니다.
-- AOP가 없는 프로젝트라면 `spring-boot-starter-aop`를 추가하세요.
-
-  ```gradle
-  implementation 'org.springframework.boot:spring-boot-starter-aop'
-  ```
+- `dicoshot-spring-boot-starter`가 `spring-aop`와 `aspectjweaver`를 전이 의존성으로 포함하므로 별도 설정 없이 동작합니다.
 
 ### 설치
 
